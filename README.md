@@ -1,5 +1,6 @@
 # Hopsify
 
-# sabari - Clone Done
+# sabari - Clone Done.
 
-# Rajnish - clone done
+# Rajnish - clone done.
+
