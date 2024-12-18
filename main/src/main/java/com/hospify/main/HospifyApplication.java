@@ -1,4 +1,4 @@
-package com.hospify.hospify;
+package com.hospify.main;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,7 +8,7 @@ public class HospifyApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(HospifyApplication.class, args);
-		System.out.println("Hello world");
+		System.out.println("Hospify Project started");
 	}
 
 }
