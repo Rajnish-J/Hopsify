@@ -1,0 +1,61 @@
+User: 
+
+    * Login: for old patients.
+    * sign in: for new patients.(inital it takes only 4 details after successful account creation user could update or add their required details)
+        [if the new patient upload the pdf means it will take the information from the pdf and updates the details... ], 
+        [if the patient update or signed in means it should send the message in gmail]
+    * make Appointments.(first hosptial view -> check the reviews -> select doctor -> select date and time -> payment process)
+    * update Appointments.
+    * cancel Appointments.
+    * view all Appointments.
+    * filter(canceled, upcoming, outdated, inbetween two days, )
+    * doctor availblity.
+    * appointment export option.
+    * claim or request for new Insurance
+    * pay to renew Insurance 
+
+Appointments:
+
+    * if patient books appointment, it will goes respective doctors page
+    * after appointment booked it will send message in the mail as appointment added message
+    * Payment (after payment it will send an mail to the respective hospital)
+    * doctor can add the prescription respect to the patient
+    * after done appointment the prescription could be redirected to the pharmacy with prescription id, to deleiver the medicines
+
+Health and Diet Tracking:
+
+    * add food.
+    * update food.
+    * delete food.
+    * view food.
+    * check BMI.
+    * report generation (graph)
+    * filter (average) -> calories, carbohydrates, proteins etc., (by week, by month)
+    * report export.
+
+Doctor:
+
+    * login
+    * requesting to add profile in the hospital (redirect to the respective hospital mail)
+    * update details
+    * doctor can approve or reject the incoming appointments
+    * view appoitments
+    * filter (for appointments) -> (canceled, upcoming, outdated, inbetween two days, )
+    * update appointments (if the doctor updates or cancel the message will redirect to the paient email)
+    * cancel appointments (if the doctor updates or cancel the message will redirect to the paient email)
+
+Hospital:
+
+    * login
+    * accept or reject the incoming doctors account creation
+    * view all appointments with respect to the hospital login
+    * filter (for appointments) -> (canceled, upcoming, outdated, inbetween two days, payment status, with respect doctors)
+    * payment verification
+
+pharmacy:
+
+    * update
+    * accept or reject the incoming prescription
+    * status of prescription
+    * filter (delivered or un deleivered medicines to the patinets)
+    * check quantity of the medicines in the storage.
