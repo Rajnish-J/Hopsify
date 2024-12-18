@@ -15,7 +15,10 @@ public class state {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "state_id")
     private long stateId;
-    private String stateName;
-    private country country;
 
+    @Column(nullable = false)
+    private String stateName;
+
+    @Column(nullable = false)
+    private country country;
 }
