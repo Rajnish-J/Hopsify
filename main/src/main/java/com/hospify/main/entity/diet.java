@@ -1,10 +1,6 @@
 package com.hospify.main.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -13,9 +9,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
-@Getter
-@Setter
-@ToString
 @EntityListeners(AuditingEntityListener.class)
 public class diet {
 
@@ -38,4 +31,60 @@ public class diet {
 	@Column(name = "updatedAt", nullable = false)
     private LocalDateTime UpdateAt;
 
+    //Getter And Setter
+
+
+    public long getDietId() {
+        return dietId;
+    }
+
+    public void setDietId(long dietId) {
+        this.dietId = dietId;
+    }
+
+    public com.hospify.main.entity.dietType getDietType() {
+        return dietType;
+    }
+
+    public void setDietType(com.hospify.main.entity.dietType dietType) {
+        this.dietType = dietType;
+    }
+
+    public List<Food> getFood() {
+        return food;
+    }
+
+    public void setFood(List<Food> food) {
+        this.food = food;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return CreatedAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        CreatedAt = createdAt;
+    }
+
+    public LocalDateTime getUpdateAt() {
+        return UpdateAt;
+    }
+
+    public void setUpdateAt(LocalDateTime updateAt) {
+        UpdateAt = updateAt;
+    }
+
+    //ToString
+
+
+    @Override
+    public String toString() {
+        return "diet{" +
+                "dietId=" + dietId +
+                ", dietType=" + dietType +
+                ", food=" + food +
+                ", CreatedAt=" + CreatedAt +
+                ", UpdateAt=" + UpdateAt +
+                '}';
+    }
 }
