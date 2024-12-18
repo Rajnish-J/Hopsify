@@ -15,7 +15,10 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "city_id")
     private long cityId;
+    
+    @Column(unique = false, nullable = false)
     private String cityName;
+    
     private state state;
 
 }
