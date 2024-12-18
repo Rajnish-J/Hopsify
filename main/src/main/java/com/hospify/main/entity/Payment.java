@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
+@EntityListeners(AuditingEntityListener.class)
 public class Payment {
 
     @Id
@@ -37,9 +39,13 @@ public class Payment {
     private String paymentStatus;
 
     @CreatedDate
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "createdAt", nullable = false)
     private LocalDateTime CreatedAt;
-
+    
     @LastModifiedDate
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "updatedAt", nullable = false)
     private LocalDateTime UpdateAt;
 
 }
