@@ -21,7 +21,9 @@ public class Doctor {
     
     @Column(unique = false, nullable = false)
     private String doctorName;
-    
+
+    @ManyToOne
+    @JoinColumn(name = "hospital_id", referencedColumnName = "hospital_id")
     private Hospital hospital;
     
     @Column(unique = true, nullable = false)
@@ -38,9 +40,11 @@ public class Doctor {
     
     @Column(unique = true, nullable = false)
     private String specilization;
-    
+
+    @OneToMany(mappedBy = "doctor")
     private List<appointment> appointmentList;
-    
+
+
     @CreatedDate
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "createdAt", nullable = false)

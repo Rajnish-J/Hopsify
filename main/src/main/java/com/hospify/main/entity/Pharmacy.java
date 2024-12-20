@@ -16,7 +16,8 @@ public class Pharmacy {
     @Column(name = "pharmacy_id")
     private long pharmacyId;
 
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "user", referencedColumnName = "userId")
     private User user;
 
     @Column(nullable = false)

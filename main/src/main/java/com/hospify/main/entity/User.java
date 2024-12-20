@@ -42,18 +42,23 @@ public class User {
     @Column(nullable = false)
     private int weight;
 
+
+    @OneToMany(mappedBy = "user")
     private List<appointment> appointments;
 
     @Column(nullable = false)
     private String streetName;
 
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "city", referencedColumnName = "city_id")
     private City city;
 
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "state", referencedColumnName = "state_id")
     private state state;
 
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "country", referencedColumnName = "country_id")
     private country country;
 
     @Column(nullable = false)
@@ -61,6 +66,7 @@ public class User {
 
     //@Column(nullable = false)
     private dietType diet;
+
 
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)

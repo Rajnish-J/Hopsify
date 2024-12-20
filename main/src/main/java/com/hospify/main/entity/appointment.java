@@ -27,15 +27,25 @@ public class appointment {
     
     @Column(unique = false, nullable = false)
     private String appointmentStatus;
-    
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
-    
+
+    @ManyToOne
+    @JoinColumn(name = "hospital", referencedColumnName = "hospital_id")
     private Hospital hospital;
-    
+
+    @ManyToOne
+    @JoinColumn(name = "doctor", referencedColumnName = "doctor_id")
     private Doctor doctor;
-    
+
+    @ManyToOne
+    @JoinColumn(name = "payment_id", referencedColumnName = "payment_id")
     private Payment payment;
-    
+
+    @ManyToOne
+    @JoinColumn(name = "prescription_id", referencedColumnName = "prescription_id")
     private Prescription prescription;
     
     @CreatedDate
