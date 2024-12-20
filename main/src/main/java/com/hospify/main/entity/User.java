@@ -70,6 +70,160 @@ public class User {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updatedAt", nullable = false)
     private LocalDateTime UpdateAt;
+    
     //Getter And Setter
+    public long getUserId() {
+        return userId;
+    }
 
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserContactNo() {
+        return userContactNo;
+    }
+
+    public void setUserContactNo(String userContactNo) {
+        this.userContactNo = userContactNo;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getGender() {
+        return Gender;
+    }
+
+    public void setGender(String gender) {
+        Gender = gender;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public List<appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<appointment> appointments) {
+        this.appointments = appointments;
+    }
+
+    public String getStreetName() {
+        return streetName;
+    }
+
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public state getState() {
+        return state;
+    }
+
+    public void setState(state state) {
+        this.state = state;
+    }
+
+    public country getCountry() {
+        return country;
+    }
+
+    public void setCountry(country country) {
+        this.country = country;
+    }
+
+    public long getPincode() {
+        return pincode;
+    }
+
+    public void setPincode(long pincode) {
+        this.pincode = pincode;
+    }
+
+    public dietType getDiet() {
+        return diet;
+    }
+
+    public void setDiet(dietType diet) {
+        this.diet = diet;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return CreatedAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        CreatedAt = createdAt;
+    }
+
+    public LocalDateTime getUpdateAt() {
+        return UpdateAt;
+    }
+
+    public void setUpdateAt(LocalDateTime updateAt) {
+        UpdateAt = updateAt;
+    }
+
+    // ToString method
+    @Override
+    public String toString() {
+        return "User [userId=" + userId + ", userName=" + userName + ", userContactNo=" + userContactNo + ", userEmail="
+                + userEmail + ", userPassword=" + userPassword + ", dateOfBirth=" + dateOfBirth + ", Gender=" + Gender
+                + ", height=" + height + ", weight=" + weight + ", appointments=" + appointments + ", streetName="
+                + streetName + ", city=" + city + ", state=" + state + ", country=" + country + ", pincode=" + pincode
+                + ", diet=" + diet + ", CreatedAt=" + CreatedAt + ", UpdateAt=" + UpdateAt + "]";
+    }
+    
 }
