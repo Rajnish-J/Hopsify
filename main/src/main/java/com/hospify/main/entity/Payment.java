@@ -17,7 +17,8 @@ public class Payment {
     @Column(name = "payment_id")
     private long paymentId;
 
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "user", referencedColumnName = "userId")
     private User user;
 
     @Column(nullable = false)

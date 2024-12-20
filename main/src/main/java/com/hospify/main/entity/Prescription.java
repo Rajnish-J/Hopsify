@@ -16,13 +16,16 @@ public class Prescription {
     @Column(name = "prescription_id")
     private long prescriptionId;
 
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "doctor", referencedColumnName = "doctorId")
     private Doctor doctor;
 
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "user", referencedColumnName = "userId")
     private User user;
 
-    @Column(nullable = false)
+    @OneToOne
+    @JoinColumn(name = "appointmentId", referencedColumnName = "appointmentId")
     private appointment appointment;
 
     @Column(nullable = false)

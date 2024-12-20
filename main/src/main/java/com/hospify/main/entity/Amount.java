@@ -16,10 +16,14 @@ public class Amount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "amount_id")
     private long amountId;
-    
 
+
+    @ManyToOne
+    @JoinColumn(name = "user", referencedColumnName = "userId")
     private User user;
-    
+
+    @ManyToOne
+    @JoinColumn(name = "hospitalId", referencedColumnName = "hospitalId")
     private Hospital hospital;
     
     @Column(unique = false, nullable = false)

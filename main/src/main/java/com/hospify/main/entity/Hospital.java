@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -29,22 +28,28 @@ public class Hospital {
     @Column(nullable = false)
     private String hospitalPassword;
 
-    @Column(nullable = false)
+    @OneToMany(mappedBy = "hospital")
     private List<Doctor> doctorList;
 
-    @Column(nullable = false)
+    @OneToMany(mappedBy = "hospital")
     private List<appointment> appointments;
 
     @Column(nullable = false)
     private String streetName;
 
-    @Column(nullable = false)
+    @OneToMany(mappedBy = "hospital")
+    private List<Pharmacy> pharmacies;
+
+    @ManyToOne
+    @JoinColumn(name = "city", referencedColumnName = "city_id")
     private City city;
 
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "state", referencedColumnName = "state_id")
     private state state;
 
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "country", referencedColumnName = "country_id")
     private country country;
 
     @Column(nullable = false)

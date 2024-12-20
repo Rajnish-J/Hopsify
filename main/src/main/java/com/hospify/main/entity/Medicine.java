@@ -22,7 +22,8 @@ public class Medicine {
     @Column(nullable = false)
     private long medicinePrice;
 
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "amountId", referencedColumnName = "amountId")
     private Amount amount;
 
     @CreatedDate

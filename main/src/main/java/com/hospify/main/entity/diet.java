@@ -16,7 +16,9 @@ public class diet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "diet_id")
     private long dietId;
-    
+
+    @ManyToOne
+    @JoinColumn(name = "dietTypeId", referencedColumnName = "dietTypeId")
     private dietType dietType;
     
     private List<Food> food;

@@ -13,7 +13,8 @@ public class state {
     @Column(nullable = false)
     private String stateName;
 
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "countryId", referencedColumnName = "countryId")
     private country country;
 
     //Getter And Setter
