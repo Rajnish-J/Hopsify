@@ -1,14 +1,9 @@
 package com.hospify.main.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+
 
 @Entity
-@Getter
-@Setter
-@ToString
 public class dietType {
 
     @Id
@@ -19,4 +14,31 @@ public class dietType {
     @Column(unique = false, nullable = false)
     private String dietType;
 
+    //Getter And Setter
+
+    public long getDietTypeId() {
+        return dietTypeId;
+    }
+
+    public void setDietTypeId(long dietTypeId) {
+        this.dietTypeId = dietTypeId;
+    }
+
+    public String getDietType() {
+        return dietType;
+    }
+
+    public void setDietType(String dietType) {
+        this.dietType = dietType;
+    }
+
+    //ToString
+
+    @Override
+    public String toString() {
+        return "dietType{" +
+                "dietTypeId=" + dietTypeId +
+                ", dietType='" + dietType + '\'' +
+                '}';
+    }
 }
