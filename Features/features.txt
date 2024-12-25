@@ -22,6 +22,7 @@ Appointments:
     * doctor can add the prescription respect to the patient
     * after done appointment the prescription could be redirected to the pharmacy with prescription id, to deleiver the medicines
     * user and doctor can set the remainder before 1 hour or three hours or 12 hours or 1 day
+    * user and doctor can set the remainder before 1hr or 3hr or 12hrs or one day.
 
 Health and Diet Tracking:
 
