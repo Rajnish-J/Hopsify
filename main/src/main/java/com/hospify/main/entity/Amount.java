@@ -1,14 +1,20 @@
 package com.hospify.main.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import jakarta.persistence.*;
 
 
-//Note : I didnot Add to Hospital And User
+//Note : I did not Add to Hospital And User
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
+@Getter
+@Setter
+@ToString
 public class Amount {
 
    @Id
@@ -32,5 +38,4 @@ public class Amount {
     @Column(nullable = false)
     private double amount;
 
-    //Getter And Setter
 }
