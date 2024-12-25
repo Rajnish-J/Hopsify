@@ -1,116 +1,33 @@
 package com.hospify.main.entity;
 
 import jakarta.persistence.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class Prescription {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "prescription_id")
     private long prescriptionId;
 
-    @ManyToOne
-    @JoinColumn(name = "doctor", referencedColumnName = "doctorId")
-    private Doctor doctor;
+    private String medicines;
 
     @ManyToOne
-    @JoinColumn(name = "user", referencedColumnName = "userId")
+    @JoinColumn(name = "user_id")
     private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "doctor_id")
+    private Doctor doctor;
+
     @OneToOne
-    @JoinColumn(name = "appointmentId", referencedColumnName = "appointmentId")
-    private appointment appointment;
+    @JoinColumn(name = "appointment_id")
+    private Appointment appointment;
 
-    @Column(nullable = false)
-    private Medicine medicine;
+    @OneToMany(mappedBy = "prescription", cascade = CascadeType.ALL)
+    private List<Medicine> medicineList;
 
-    @CreatedDate
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "createdAt", nullable = false)
-    private LocalDateTime CreatedAt;
-    
-    @LastModifiedDate
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "updatedAt", nullable = false)
-    private LocalDateTime UpdateAt;
 
-    //Getter And Setter
-
-    public long getPrescriptionId() {
-        return prescriptionId;
-    }
-
-    public void setPrescriptionId(long prescriptionId) {
-        this.prescriptionId = prescriptionId;
-    }
-
-    public Doctor getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public com.hospify.main.entity.appointment getAppointment() {
-        return appointment;
-    }
-
-    public void setAppointment(com.hospify.main.entity.appointment appointment) {
-        this.appointment = appointment;
-    }
-
-    public Medicine getMedicine() {
-        return medicine;
-    }
-
-    public void setMedicine(Medicine medicine) {
-        this.medicine = medicine;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return CreatedAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        CreatedAt = createdAt;
-    }
-
-    public LocalDateTime getUpdateAt() {
-        return UpdateAt;
-    }
-
-    public void setUpdateAt(LocalDateTime updateAt) {
-        UpdateAt = updateAt;
-    }
-
-    //ToString
-
-    @Override
-    public String toString() {
-        return "Prescription{" +
-                "prescriptionId=" + prescriptionId +
-                ", doctor=" + doctor +
-                ", user=" + user +
-                ", appointment=" + appointment +
-                ", medicine=" + medicine +
-                ", CreatedAt=" + CreatedAt +
-                ", UpdateAt=" + UpdateAt +
-                '}';
-    }
+    // Getters and Setters
 }

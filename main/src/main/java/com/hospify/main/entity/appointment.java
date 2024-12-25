@@ -1,169 +1,42 @@
 package com.hospify.main.entity;
 
 import jakarta.persistence.*;
-
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class appointment {
-
+public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "appointment_id")
     private long appointmentId;
-    
-    @Column(unique = false, nullable = false)
+
     private LocalDate appointmentDate;
-    
-    @Column(unique = false, nullable = false)
     private String reason;
-    
-    @Column(unique = false, nullable = false)
     private String appointmentStatus;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "hospital", referencedColumnName = "hospital_id")
-    private Hospital hospital;
-
-    @ManyToOne
-    @JoinColumn(name = "doctor", referencedColumnName = "doctor_id")
+    @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
     @ManyToOne
-    @JoinColumn(name = "payment_id", referencedColumnName = "payment_id")
+    @JoinColumn(name = "hospital_id")
+    private Hospital hospital;
+
+    @OneToOne
+    @JoinColumn(name = "prescription_id")
+    private Prescription prescription;
+
+    @OneToOne
+    @JoinColumn(name = "payment_id")
     private Payment payment;
 
-    @ManyToOne
-    @JoinColumn(name = "prescription_id", referencedColumnName = "prescription_id")
-    private Prescription prescription;
-    
-    @CreatedDate
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "createdAt", nullable = false)
-    private LocalDateTime CreatedAt;
-    
-    @LastModifiedDate
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "updatedAt", nullable = false)
-    private LocalDateTime UpdateAt;
+    @OneToOne
+    @JoinColumn(name="total_Amount")
+    private Amount amount;
 
-    //Getter And Setter
-    public long getAppointmentId() {
-        return appointmentId;
-    }
-
-    public void setAppointmentId(long appointmentId) {
-        this.appointmentId = appointmentId;
-    }
-
-    public LocalDate getAppointmentDate() {
-        return appointmentDate;
-    }
-
-    public void setAppointmentDate(LocalDate appointmentDate) {
-        this.appointmentDate = appointmentDate;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public void setReason(String reason) {
-        this.reason = reason;
-    }
-
-    public String getAppointmentStatus() {
-        return appointmentStatus;
-    }
-
-    public void setAppointmentStatus(String appointmentStatus) {
-        this.appointmentStatus = appointmentStatus;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Hospital getHospital() {
-        return hospital;
-    }
-
-    public void setHospital(Hospital hospital) {
-        this.hospital = hospital;
-    }
-
-    public Doctor getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
-    }
-
-    public Payment getPayment() {
-        return payment;
-    }
-
-    public void setPayment(Payment payment) {
-        this.payment = payment;
-    }
-
-    public Prescription getPrescription() {
-        return prescription;
-    }
-
-    public void setPrescription(Prescription prescription) {
-        this.prescription = prescription;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return CreatedAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        CreatedAt = createdAt;
-    }
-
-    public LocalDateTime getUpdateAt() {
-        return UpdateAt;
-    }
-
-    public void setUpdateAt(LocalDateTime updateAt) {
-        UpdateAt = updateAt;
-    }
-
-    //ToString
-
-
-    @Override
-    public String toString() {
-        return "appointment{" +
-                "appointmentId=" + appointmentId +
-                ", appointmentDate=" + appointmentDate +
-                ", reason='" + reason + '\'' +
-                ", appointmentStatus='" + appointmentStatus + '\'' +
-                ", user=" + user +
-                ", hospital=" + hospital +
-                ", doctor=" + doctor +
-                ", payment=" + payment +
-                ", prescription=" + prescription +
-                ", CreatedAt=" + CreatedAt +
-                ", UpdateAt=" + UpdateAt +
-                '}';
-    }
 }

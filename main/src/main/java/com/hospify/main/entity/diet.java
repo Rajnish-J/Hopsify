@@ -10,83 +10,20 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class diet {
+public class Diet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "diet_id")
     private long dietId;
 
     @ManyToOne
-    @JoinColumn(name = "dietTypeId", referencedColumnName = "dietTypeId")
-    private dietType dietType;
-    
-    private List<Food> food;
+    @JoinColumn(name = "diet_type_id")
+    private DietType dietType;
 
-    @CreatedDate
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "createdAt", nullable = false)
-    private LocalDateTime CreatedAt;
-    
-    @LastModifiedDate
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "updatedAt", nullable = false)
-    private LocalDateTime UpdateAt;
+    @ManyToOne
+    @JoinColumn(name = "food_id")
+    private Food food;
 
-    //Getter And Setter
+    // Getters and Setters
 
-
-    public long getDietId() {
-        return dietId;
-    }
-
-    public void setDietId(long dietId) {
-        this.dietId = dietId;
-    }
-
-    public com.hospify.main.entity.dietType getDietType() {
-        return dietType;
-    }
-
-    public void setDietType(com.hospify.main.entity.dietType dietType) {
-        this.dietType = dietType;
-    }
-
-    public List<Food> getFood() {
-        return food;
-    }
-
-    public void setFood(List<Food> food) {
-        this.food = food;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return CreatedAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        CreatedAt = createdAt;
-    }
-
-    public LocalDateTime getUpdateAt() {
-        return UpdateAt;
-    }
-
-    public void setUpdateAt(LocalDateTime updateAt) {
-        UpdateAt = updateAt;
-    }
-
-    //ToString
-
-
-    @Override
-    public String toString() {
-        return "diet{" +
-                "dietId=" + dietId +
-                ", dietType=" + dietType +
-                ", food=" + food +
-                ", CreatedAt=" + CreatedAt +
-                ", UpdateAt=" + UpdateAt +
-                '}';
-    }
 }
