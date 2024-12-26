@@ -1,18 +1,12 @@
 package com.hospify.main.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-//Doubt : Becase One Pharmacy can Contain multiple Appoinments.
+//Doubt : Because One Pharmacy can Contain multiple Appointments.
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Getter
-@Setter
-@ToString
 public class Pharmacy {
 
     @Id
@@ -45,5 +39,82 @@ public class Pharmacy {
     @OneToOne
     @JoinColumn(name = "prescription_id")
     private Prescription prescription;
-    
+
+    public long getPharmacyId() {
+        return pharmacyId;
+    }
+
+    public void setPharmacyId(long pharmacyId) {
+        this.pharmacyId = pharmacyId;
+    }
+
+    public String getPharmacySpecialization() {
+        return pharmacySpecialization;
+    }
+
+    public void setPharmacySpecialization(String pharmacySpecialization) {
+        this.pharmacySpecialization = pharmacySpecialization;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Appointment getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public Hospital getHospital() {
+        return hospital;
+    }
+
+    public void setHospital(Hospital hospital) {
+        this.hospital = hospital;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
+
+    public Prescription getPrescription() {
+        return prescription;
+    }
+
+    public void setPrescription(Prescription prescription) {
+        this.prescription = prescription;
+    }
+
+    @Override
+    public String toString() {
+        return "Pharmacy{" +
+                "pharmacyId=" + pharmacyId +
+                ", pharmacySpecialization='" + pharmacySpecialization + '\'' +
+                ", user=" + user +
+                ", appointment=" + appointment +
+                ", doctor=" + doctor +
+                ", hospital=" + hospital +
+                ", payment=" + payment +
+                ", prescription=" + prescription +
+                '}';
+    }
 }

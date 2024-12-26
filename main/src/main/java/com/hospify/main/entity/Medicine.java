@@ -1,16 +1,10 @@
 package com.hospify.main.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Getter
-@Setter
-@ToString
 public class Medicine {
 
     @Id
@@ -27,5 +21,46 @@ public class Medicine {
     @ManyToOne
     @JoinColumn(name = "prescription_id")
     private Prescription prescription;
-    
+
+    public long getMedicineId() {
+        return medicineId;
+    }
+
+    public void setMedicineId(long medicineId) {
+        this.medicineId = medicineId;
+    }
+
+    public String getMedicineName() {
+        return medicineName;
+    }
+
+    public void setMedicineName(String medicineName) {
+        this.medicineName = medicineName;
+    }
+
+    public long getMedicinePrice() {
+        return medicinePrice;
+    }
+
+    public void setMedicinePrice(long medicinePrice) {
+        this.medicinePrice = medicinePrice;
+    }
+
+    public Prescription getPrescription() {
+        return prescription;
+    }
+
+    public void setPrescription(Prescription prescription) {
+        this.prescription = prescription;
+    }
+
+    @Override
+    public String toString() {
+        return "Medicine{" +
+                "medicineId=" + medicineId +
+                ", medicineName='" + medicineName + '\'' +
+                ", medicinePrice=" + medicinePrice +
+                ", prescription=" + prescription +
+                '}';
+    }
 }

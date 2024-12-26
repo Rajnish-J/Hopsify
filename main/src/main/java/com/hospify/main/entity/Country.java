@@ -1,14 +1,8 @@
 package com.hospify.main.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 @Entity
-@Getter
-@Setter
-@ToString
 public class Country {
 
     @Id
@@ -16,5 +10,28 @@ public class Country {
     private long countryId;
 
     private String countryName;
-    
+
+    public long getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(long countryId) {
+        this.countryId = countryId;
+    }
+
+    public String getCountryName() {
+        return countryName;
+    }
+
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
+    }
+
+    @Override
+    public String toString() {
+        return "Country{" +
+                "countryId=" + countryId +
+                ", countryName='" + countryName + '\'' +
+                '}';
+    }
 }
