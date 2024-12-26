@@ -21,13 +21,24 @@ public class Food {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long foodId;
 
+    @Column(nullable = false)
     private String foodName;
-    private double quantity;
-    private double carbohydrates;
-    private double proteins;
-    private double calories;
-    private double vitamins;
-    private double fat;
 
-    // Getters and Setters
+    @Column(nullable = false)
+    private double quantity;
+
+    @Column(nullable = false)
+    private double carbohydrates;
+
+    @Column(nullable = false)
+    private double proteins;
+
+    @Column(nullable = false)
+    private double calories;
+
+    @Column(nullable = false)
+    private double vitamins;
+
+    @Column(nullable = false)
+    private double fat;
 }

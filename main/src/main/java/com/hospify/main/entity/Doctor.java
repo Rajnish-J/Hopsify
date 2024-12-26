@@ -14,16 +14,26 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Setter
 @ToString
 public class Doctor {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long doctorId;
 
+    @Column(nullable = false)
     private String doctorName;
+
+    @Column(nullable = false)
     private String specialization;
+
+    @Column(unique = true,nullable = false)
     private String email;
+
+    @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
     private String gender;
+
+    @Column(unique = true,nullable = false)
     private long doctorPhone;
 
     @ManyToOne
@@ -35,6 +45,4 @@ public class Doctor {
 
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
     private List<Prescription> prescriptions;
-
-    // Getters and Setters
 }
