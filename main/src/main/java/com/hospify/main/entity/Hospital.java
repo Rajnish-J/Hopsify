@@ -32,24 +32,28 @@ public class Hospital {
     private long phoneNumber;
 
     @Column(nullable = false)
-    private String city;
-
-    @Column(nullable = false)
     private String street;
 
-    @Column(nullable = false)
-    private String state;
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private City city;
 
-    @Column(nullable = false)
-    private String country;
+    @ManyToOne
+    @JoinColumn(name = "state_id")
+    private States state;
+
+
+    @ManyToOne
+    @JoinColumn(name = "country_id")
+    private Country country;
 
     @Column(nullable = false)
     private long pincode;
 
-    @OneToMany(mappedBy = "hospital", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "hospital", cascade = CascadeType.ALL)
     private List<Appointment> appointments;
 
-    @OneToMany(mappedBy = "hospital", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "hospital", cascade = CascadeType.ALL)
     private List<Pharmacy> pharmacies;
 
 
