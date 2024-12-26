@@ -47,10 +47,6 @@ public class Appointment {
     @JoinColumn(name = "payment_id")
     private Payment payment;
 
-    @OneToOne
-    @JoinColumn(name="total_Amount")
-    private Amount amount;
-
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "createdAt", nullable = false)
