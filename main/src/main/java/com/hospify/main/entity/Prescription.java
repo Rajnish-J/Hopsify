@@ -33,7 +33,4 @@ public class Prescription {
 
     @OneToMany(mappedBy = "prescription", cascade = CascadeType.ALL)
     private List<Medicine> medicineList;
-
-
-    // Getters and Setters
 }

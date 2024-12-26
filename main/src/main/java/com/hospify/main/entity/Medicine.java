@@ -23,10 +23,6 @@ public class Medicine {
     @Column(nullable = false)
     private long medicinePrice;
 
-    @OneToOne
-    @JoinColumn(name = "amount_id")
-    private Amount amount;
-
     @ManyToOne
     @JoinColumn(name = "prescription_id")
     private Prescription prescription;

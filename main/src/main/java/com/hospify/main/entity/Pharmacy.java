@@ -18,6 +18,7 @@ public class Pharmacy {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long pharmacyId;
 
+    @Column(nullable = false)
     private String pharmacySpecialization;
 
     @ManyToOne
@@ -43,6 +44,4 @@ public class Pharmacy {
     @OneToOne
     @JoinColumn(name = "prescription_id")
     private Prescription prescription;
-
-    // Getters and Setters
 }

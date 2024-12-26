@@ -16,6 +16,4 @@ public class DietType {
     private long dietTypeId;
 
     private String dietType;
-
-    // Getters and Setters
 }

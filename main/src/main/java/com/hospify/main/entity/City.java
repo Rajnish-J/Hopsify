@@ -20,7 +20,5 @@ public class City {
     @ManyToOne
     @JoinColumn(name = "state_id")
     private States state;
-
-    // Getters and Setters
 }
 

@@ -19,9 +19,13 @@ public class Payment {
     private long paymentId;
 
     private LocalDate paymentDate;
+
     private String paymentType;
+
     private String paymentStatus;
+
     private double amount;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

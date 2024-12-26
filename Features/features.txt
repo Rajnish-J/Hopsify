@@ -11,8 +11,6 @@ User:
     * filter(canceled, upcoming, outdated, inbetween two days, )
     * doctor availblity.
     * appointment export option.
-    * claim or request for new Insurance
-    * pay to renew Insurance 
 
 Appointments:
 

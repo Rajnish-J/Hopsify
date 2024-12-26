@@ -22,7 +22,9 @@ public class Appointment {
     private long appointmentId;
 
     private LocalDate appointmentDate;
+
     private String reason;
+
     private String appointmentStatus;
 
     @ManyToOne

@@ -24,15 +24,31 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
 
+    @Column(nullable = false)
     private String username;
+
+    @Column(unique = true, nullable = false)
     private long userContactNo;
+
+    @Column(unique = true, nullable = false)
     private String userEmail;
+
+    @Column(nullable = false)
     private String userPassword;
+
+    @Column(nullable = false)
     private LocalDate userDob;
+
     private int height;
+
     private int weight;
+
+    private String maritalStatus;
+
     private String streetName;
+
     private long pinCode;
+
     private String status;
 
     @ManyToOne
@@ -43,6 +59,7 @@ public class User {
     @JoinColumn(name = "state_id")
     private States state;
 
+    @Column(nullable = false)
     private String gender;
 
     @ManyToOne
@@ -67,6 +84,4 @@ public class User {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updatedAt", nullable = false)
     private LocalDateTime updatedAt;
-
-    // Getters and Setters
 }

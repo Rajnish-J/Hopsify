@@ -14,6 +14,7 @@ public class States {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long stateId;
 
+    @Column(nullable = false)
     private String stateName;
 
     @ManyToOne
