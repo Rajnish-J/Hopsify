@@ -28,8 +28,6 @@ public class UserDTO {
 
     private long pinCode;
 
-    private String status;
-
     private CityDTO city;
 
     private StatesDTO state;
@@ -134,14 +132,6 @@ public class UserDTO {
 
     public void setPinCode(long pinCode) {
         this.pinCode = pinCode;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public CityDTO getCity() {
