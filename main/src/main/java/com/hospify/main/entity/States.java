@@ -10,6 +10,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class States {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long stateId;
@@ -20,4 +21,5 @@ public class States {
     @ManyToOne
     @JoinColumn(name = "country_id")
     private Country country;
+    
 }

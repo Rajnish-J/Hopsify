@@ -13,6 +13,7 @@ import java.util.List;
 @Setter
 @ToString
 public class Prescription {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long prescriptionId;
@@ -33,4 +34,5 @@ public class Prescription {
 
     @OneToMany(mappedBy = "prescription", cascade = CascadeType.ALL)
     private List<Medicine> medicineList;
+    
 }

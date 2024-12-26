@@ -11,6 +11,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class City {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long cityId;

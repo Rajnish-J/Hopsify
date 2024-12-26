@@ -11,9 +11,11 @@ import lombok.ToString;
 @Setter
 @ToString
 public class DietType {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long dietTypeId;
 
     private String dietType;
+    
 }

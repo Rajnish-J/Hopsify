@@ -1,14 +1,10 @@
 package com.hospify.main.entity;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
-import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
@@ -29,7 +25,4 @@ public class Diet {
     @ManyToOne
     @JoinColumn(name = "food_id")
     private Food food;
-
-    // Getters and Setters
-
 }

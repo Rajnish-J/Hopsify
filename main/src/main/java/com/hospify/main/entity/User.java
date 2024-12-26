@@ -20,6 +20,7 @@ import java.util.List;
 @Setter
 @ToString
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
@@ -59,12 +60,13 @@ public class User {
     @JoinColumn(name = "state_id")
     private States state;
 
-    @Column(nullable = false)
-    private String gender;
-
     @ManyToOne
     @JoinColumn(name = "country_id")
     private Country country;
+
+    @Column(nullable = false)
+    private String gender;
+
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Appointment> appointments;
@@ -84,4 +86,5 @@ public class User {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updatedAt", nullable = false)
     private LocalDateTime updatedAt;
+    
 }

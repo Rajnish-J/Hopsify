@@ -7,13 +7,13 @@ import lombok.ToString;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDate;
 
-
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
 @ToString
 public class Payment {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long paymentId;
@@ -34,5 +34,4 @@ public class Payment {
     @JoinColumn(name = "hospital_id")
     private Hospital hospital;
 
-    // Getters and Setters
 }

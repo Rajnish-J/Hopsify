@@ -12,6 +12,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Setter
 @ToString
 public class Medicine {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "medicine_id")
@@ -26,4 +27,5 @@ public class Medicine {
     @ManyToOne
     @JoinColumn(name = "prescription_id")
     private Prescription prescription;
+    
 }
