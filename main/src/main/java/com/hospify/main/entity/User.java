@@ -43,7 +43,7 @@ public class User {
 
     private long pinCode;
 
-    private String status;
+    // private String status;
 
     @ManyToOne
     @JoinColumn(name = "city_id")
@@ -168,13 +168,13 @@ public class User {
         this.pinCode = pinCode;
     }
 
-    public String getStatus() {
+  /*  public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
-    }
+    } */
 
     public City getCity() {
         return city;
@@ -253,7 +253,7 @@ public class User {
         return "User [userId=" + userId + ", username=" + username + ", userContactNo=" + userContactNo + ", userEmail="
                 + userEmail + ", userPassword=" + userPassword + ", userDob=" + userDob + ", height=" + height
                 + ", weight=" + weight + ", maritalStatus=" + maritalStatus + ", streetName=" + streetName
-                + ", pinCode=" + pinCode + ", status=" + status + ", city=" + city + ", state=" + state + ", country="
+                + ", pinCode=" + pinCode  + ", city=" + city + ", state=" + state + ", country="
                 + country + ", gender=" + gender + ", appointments=" + appointments + ", payments=" + payments
                 + ", prescriptions=" + prescriptions + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
     }
