@@ -10,19 +10,20 @@ import java.time.Period;
 
 @Component
 public class UserBo {
+
     @Autowired
     private UserRepo userRepo;
 
   /*   * Login: for old patients.
-            * sign in: for new patients.(inital it takes only 4 details after successful account creation user could update or add their required details)
+            * sign in: for new patients.(initial it takes only 4 details after successful account creation user could update or add their required details)
             [if the new patient upload the pdf means it will take the information from the pdf and updates the details... ],
             [if the patient update or signed in means it should send the message in gmail]
-            * make Appointments.(first hosptial view -> check the reviews -> select doctor -> select date and time -> payment process)
+            * make Appointments.(first hospital view -> check the reviews -> select doctor -> select date and time -> payment process)
             * update Appointments.
             * cancel Appointments.
             * view all Appointments.
     * filter(canceled, upcoming, outdated, inbetween two days, )
-    * doctor availblity.
+    * doctor availability.
             * appointment export option.
     * claim or request for new Insurance
     * pay to renew Insurance  */
@@ -34,16 +35,16 @@ public class UserBo {
         validatePassword(user.getUserPassword());
         validateDOB(user.getUserDob());
         validateGender(user.getGender());
-        validatePhonneNumber(user.getUserContactNo());
-        User resuser=userRepo.save(user);
-        return resuser;
+        validatePhoneNumber(user.getUserContactNo());
+        User userObj = userRepo.save(user);
+        return userObj;
     }
 
     //Validation
 
     //Validate Email
     private void validateEmail(String userEmail) throws EmailException {
-        if(userEmail.contains("@gmail.com") || userEmail.isEmpty()){
+        if(!userEmail.contains("@gmail.com") || userEmail.isEmpty()){
             throw new EmailException("Invalid Email");
         }
     }
@@ -95,7 +96,7 @@ public class UserBo {
         }
     }
     //Validate PhoneNumber
-    private void validatePhonneNumber(long userContactNo) throws MobileNumberException {
+    private void validatePhoneNumber(long userContactNo) throws MobileNumberException {
         String number=userContactNo+"";
         if(number.length()!=10){
             throw new MobileNumberException("Mobile Number must be 10 digits");
