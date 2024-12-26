@@ -43,11 +43,6 @@ public class User {
 
     private long pinCode;
 
-<<<<<<< HEAD
-    // private String status;
-
-=======
->>>>>>> ad0d5a9950f51e961d90f880889603673eb72b6c
     @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;
@@ -245,14 +240,6 @@ public class User {
 
     @Override
     public String toString() {
-<<<<<<< HEAD
-        return "User [userId=" + userId + ", username=" + username + ", userContactNo=" + userContactNo + ", userEmail="
-                + userEmail + ", userPassword=" + userPassword + ", userDob=" + userDob + ", height=" + height
-                + ", weight=" + weight + ", maritalStatus=" + maritalStatus + ", streetName=" + streetName
-                + ", pinCode=" + pinCode  + ", city=" + city + ", state=" + state + ", country="
-                + country + ", gender=" + gender + ", appointments=" + appointments + ", payments=" + payments
-                + ", prescriptions=" + prescriptions + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
-=======
         return "User{" +
                 "userId=" + userId +
                 ", username='" + username + '\'' +
@@ -275,6 +262,5 @@ public class User {
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
->>>>>>> ad0d5a9950f51e961d90f880889603673eb72b6c
     }
 }
