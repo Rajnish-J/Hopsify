@@ -29,7 +29,7 @@ public class UserController {
         try {
             UserResponse response = userService.registerUser(maptoEntity(userDTO));
             User user= response.getUser();
-            return ResponseEntity.ok(mapToDTO(user));
+            return ResponseEntity.ok(user);
         } catch (PasswordException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         } catch (GenderException e) {
