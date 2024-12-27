@@ -46,7 +46,10 @@ public class UserBo {
     private void validateEmail(String userEmail) throws EmailException {
         if(!userEmail.contains("@gmail.com") || userEmail.isEmpty()){
             throw new EmailException("Invalid Email");
+        }if(!userRepo.findByUserEmail(userEmail).isEmpty()){
+            throw new EmailException("Email is Already Exit in DataBase");
         }
+
     }
 
     //ValidatePassword
@@ -100,6 +103,9 @@ public class UserBo {
         String number=userContactNo+"";
         if(number.length()!=10){
             throw new MobileNumberException("Mobile Number must be 10 digits");
+        }
+        if(!userRepo.findByUserContactNo(userContactNo).isEmpty()){
+            throw new MobileNumberException("Mobile Number Already Exit in DataBase");
         }
     }
 

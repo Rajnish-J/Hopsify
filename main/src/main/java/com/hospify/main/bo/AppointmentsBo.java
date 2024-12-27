@@ -1,9 +1,34 @@
 package com.hospify.main.bo;
 
+import com.hospify.main.Repo.AppointmentRepo;
+import com.hospify.main.Repo.DoctorRepo;
+import com.hospify.main.Repo.HospitalRepo;
+import com.hospify.main.Repo.UserRepo;
+import com.hospify.main.entity.Appointment;
+import com.hospify.main.entity.Doctor;
+import com.hospify.main.entity.Hospital;
+import com.hospify.main.entity.User;
+import com.hospify.main.exception.DOBException;
+import com.hospify.main.exception.DoctorException;
+import com.hospify.main.exception.HospitalException;
+import com.hospify.main.exception.UserException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.print.Doc;
+import java.time.LocalDate;
+import java.util.Optional;
 
 @Component
 public class AppointmentsBo {
+    @Autowired
+    private AppointmentRepo appointmentRepo;
+    @Autowired
+    private UserRepo userRepo;
+    @Autowired
+    private DoctorRepo doctorRepo;
+    @Autowired
+    private HospitalRepo hospitalRepo;
 
     /*
 
@@ -14,5 +39,53 @@ public class AppointmentsBo {
      * after done appointment the prescription could be redirected to the pharmacy with prescription id, to deleiver the medicines
 
      */
+
+    public Appointment bookAppointment(Appointment appointment) throws UserException, DoctorException, HospitalException, DOBException {
+        validateUser(appointment.getUser());
+        validateDoctor(appointment.getDoctor());
+        validateHospital(appointment.getHospital());
+        validateDate(appointment.getAppointmentDate());
+        appointment.setReason("Pending");
+        Appointment resAppointment=appointmentRepo.save(appointment);
+        return resAppointment;
+    }
+
+    //Validate User
+    private void validateUser(User user) throws UserException {
+        Optional<User> userObj=userRepo.findById(user.getUserId());
+        if(!userObj.isPresent()){
+            throw new UserException("User Not Exit in DataBase");
+        }
+        user=userObj.get();
+    }
+
+    //Validate Doctor
+    private void validateDoctor(Doctor doctor) throws DoctorException {
+       Optional<Doctor> doctorObj= doctorRepo.findById(doctor.getDoctorId());
+       if(!doctorObj.isPresent()){
+           throw new DoctorException("Docotor Not Exit in DataBase");
+       }
+       doctor=doctorObj.get();
+    }
+
+    //Validation Hospital
+    private void validateHospital(Hospital hospital) throws HospitalException {
+        Optional<Hospital> hospitalObj=hospitalRepo.findById(hospital.getHospitalId());
+        if(!hospitalObj.isPresent()){
+            throw new HospitalException("Hospital Not Exit in DataBase");
+        }
+        hospital=hospitalObj.get();
+    }
+
+    //Validate Date
+    private void validateDate(LocalDate appointmentDate) throws DOBException {
+        LocalDate currentDate = LocalDate.now();
+        if (appointmentDate.isBefore(currentDate)) {
+            throw new DOBException("The appointment date cannot be in the past.");
+        }
+        if (appointmentDate.isAfter(currentDate.plusMonths(1))) {
+            throw new DOBException ("The appointment date must be within one month from the current date.");
+        }
+    }
 
 }
