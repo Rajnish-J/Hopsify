@@ -2,6 +2,7 @@ package com.hospify.main.service;
 
 
 import com.hospify.main.Repo.AppointmentRepo;
+import com.hospify.main.Response.UserResponse;
 import com.hospify.main.bo.AppointmentsBo;
 import com.hospify.main.entity.Appointment;
 import com.hospify.main.exception.DOBException;
@@ -16,9 +17,19 @@ public class AppointmentService {
 
     @Autowired
     private AppointmentsBo appointmentsBo;
+
+    @Autowired
+    private UserResponse userResponse;
     //Book Appointment
-    public Appointment bookAppointment(Appointment appointment) throws UserException, DoctorException, HospitalException, DOBException {
+    public UserResponse bookAppointment(Appointment appointment) throws UserException, DoctorException, HospitalException, DOBException {
         Appointment resappointment=appointmentsBo.bookAppointment(appointment);
-        return resappointment;
+        if(resappointment!=null){
+            userResponse.setAppointment(resappointment);
+            userResponse.setSuccessMessage("Appointment Booked Successfully");
+            System.out.println(userResponse);
+        }else{
+            userResponse.setFailureMessage("Appointment is not Booked Successfully");
+        }
+        return userResponse;
     }
 }

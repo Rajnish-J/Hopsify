@@ -45,7 +45,7 @@ public class AppointmentsBo {
         validateDoctor(appointment.getDoctor());
         validateHospital(appointment.getHospital());
         validateDate(appointment.getAppointmentDate());
-        appointment.setReason("Pending");
+        appointment.setAppointmentStatus("Pending");
         Appointment resAppointment=appointmentRepo.save(appointment);
         return resAppointment;
     }

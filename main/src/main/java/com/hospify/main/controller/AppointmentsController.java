@@ -1,6 +1,7 @@
 package com.hospify.main.controller;
 
 import com.hospify.main.DTO.*;
+import com.hospify.main.Response.UserResponse;
 import com.hospify.main.entity.*;
 import com.hospify.main.exception.*;
 import com.hospify.main.service.*;
@@ -20,8 +21,8 @@ public class AppointmentsController {
     public ResponseEntity<?> registerUser(@RequestBody AppointmentDTO appointmentDTO){
         System.out.println(appointmentDTO);
         try {
-           Appointment appointment = appointmentService.bookAppointment(mapToEntity(appointmentDTO));
-            return ResponseEntity.ok(mapToDto(appointment));
+           UserResponse resObj = appointmentService.bookAppointment(mapToEntity(appointmentDTO));
+            return ResponseEntity.ok(mapToDto(resObj.getAppointment()));
         } catch (UserException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         } catch (DoctorException e) {
