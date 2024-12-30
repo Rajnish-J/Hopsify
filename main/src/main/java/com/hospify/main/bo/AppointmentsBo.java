@@ -14,6 +14,8 @@ import org.springframework.stereotype.Component;
 
 import javax.print.Doc;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Optional;
 
 @Component
@@ -89,15 +91,29 @@ public class AppointmentsBo {
     }
 
     //Validate Date
-    private void validateDate(LocalDate appointmentDate) throws DOBException {
+    private void validateDate(LocalDateTime appointmentDateTime) throws DOBException {
+        // Separate date and time components
+        LocalDate appointmentDate = appointmentDateTime.toLocalDate();
+        LocalTime appointmentTime = appointmentDateTime.toLocalTime();
+
+        // Current date and time
         LocalDate currentDate = LocalDate.now();
+        LocalTime currentTime = LocalTime.now();
+
+        // Validate the date component
         if (appointmentDate.isBefore(currentDate)) {
             throw new DOBException("The appointment date cannot be in the past.");
         }
         if (appointmentDate.isAfter(currentDate.plusMonths(1))) {
-            throw new DOBException ("The appointment date must be within one month from the current date.");
+            throw new DOBException("The appointment date must be within one month from the current date.");
+        }
+
+        // Validate the time component only if the appointment date is today
+        if (appointmentDate.isEqual(currentDate) && appointmentTime.isBefore(currentTime)) {
+            throw new DOBException("The appointment time cannot be in the past for today's date.");
         }
     }
+
 
     //Validate AppointmentId
     private void validateAppointmentId(long appointmentId) throws AppointmentException {

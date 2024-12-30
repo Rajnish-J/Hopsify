@@ -16,7 +16,7 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long appointmentId;
 
-    private LocalDate appointmentDate;
+    private LocalDateTime appointmentDate;
 
     private String reason;
 
@@ -60,11 +60,11 @@ public class Appointment {
         this.appointmentId = appointmentId;
     }
 
-    public LocalDate getAppointmentDate() {
+    public LocalDateTime getAppointmentDate() {
         return appointmentDate;
     }
 
-    public void setAppointmentDate(LocalDate appointmentDate) {
+    public void setAppointmentDate(LocalDateTime appointmentDate) {
         this.appointmentDate = appointmentDate;
     }
 
