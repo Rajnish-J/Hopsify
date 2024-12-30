@@ -31,7 +31,28 @@ public class AppointmentsController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         } catch (DOBException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (AppointmentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
+    }
+
+        @PostMapping("updateappointment")
+    public ResponseEntity<?> updateAppointment(@RequestBody AppointmentDTO appointmentDTO){
+        try {
+            UserResponse resObj=appointmentService.updateAppointment(mapToEntity(appointmentDTO));
+            return ResponseEntity.ok(mapToDto(resObj.getAppointment()));
+        } catch (HospitalException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (AppointmentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (UserException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (DOBException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (DoctorException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+
     }
 
     //Map TO Entity
@@ -40,6 +61,9 @@ public class AppointmentsController {
         Appointment appointment=new Appointment();
         appointment.setAppointmentDate(appointmentDTO.getAppointmentDate());
         appointment.setReason(appointmentDTO.getReason());
+        if(appointmentDTO.getAppointmentId()!=0){
+            appointment.setAppointmentId(appointmentDTO.getAppointmentId());
+        }
 
         User user=new User();
         user.setUserId(appointmentDTO.getUser().getUserId());
@@ -53,6 +77,21 @@ public class AppointmentsController {
         hospital.setHospitalId(appointmentDTO.getHospital().getHospitalId());
         appointment.setHospital(hospital);
 
+        if(appointmentDTO.getAppointmentStatus()!=null){
+            appointment.setAppointmentStatus(appointmentDTO.getAppointmentStatus());
+        }
+        if(appointmentDTO.getPrescription()!=null){
+            PrescriptionDTO prescriptionDTO=appointmentDTO.getPrescription();
+            Prescription prescription=new Prescription();
+            prescription.setPrescriptionId(prescriptionDTO.getPrescriptionId());
+        }
+        if(appointmentDTO.getPayment()!=null){
+            PaymentDTO paymentDTO=appointmentDTO.getPayment();
+            Payment payment=new Payment();
+            payment.setPaymentId(paymentDTO.getPaymentId());
+        }
+
+
         return appointment;
     }
 
@@ -63,6 +102,7 @@ public class AppointmentsController {
         appointmentDTO.setAppointmentDate(appointment.getAppointmentDate());
         appointmentDTO.setReason(appointment.getReason());
         appointmentDTO.setAppointmentStatus(appointment.getAppointmentStatus());
+        appointmentDTO.setAppointmentId(appointment.getAppointmentId());
 
         UserDTO userDTO = new UserDTO();
         userDTO.setUserId(appointment.getUser().getUserId());
