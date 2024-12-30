@@ -44,7 +44,7 @@ public class Appointment {
 
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "createdAt", nullable = false)
+    @Column(name = "createdAt", nullable = false,updatable = false)
     private LocalDateTime createdAt;
 
     @LastModifiedDate

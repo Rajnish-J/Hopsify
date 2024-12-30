@@ -8,10 +8,7 @@ import com.hospify.main.entity.Appointment;
 import com.hospify.main.entity.Doctor;
 import com.hospify.main.entity.Hospital;
 import com.hospify.main.entity.User;
-import com.hospify.main.exception.DOBException;
-import com.hospify.main.exception.DoctorException;
-import com.hospify.main.exception.HospitalException;
-import com.hospify.main.exception.UserException;
+import com.hospify.main.exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -40,14 +37,28 @@ public class AppointmentsBo {
 
      */
 
-    public Appointment bookAppointment(Appointment appointment) throws UserException, DoctorException, HospitalException, DOBException {
+    public Appointment bookAppointment(Appointment appointment) throws UserException, DoctorException, HospitalException, DOBException, AppointmentException {
         validateUser(appointment.getUser());
         validateDoctor(appointment.getDoctor());
         validateHospital(appointment.getHospital());
         validateDate(appointment.getAppointmentDate());
+        validateAppointmentreason(appointment.getReason());
         appointment.setAppointmentStatus("Pending");
         Appointment resAppointment=appointmentRepo.save(appointment);
         return resAppointment;
+    }
+
+    //Update Appointment
+    public Appointment updateAppointment(Appointment appointment) throws UserException, DOBException, HospitalException, DoctorException, AppointmentException {
+        validateUser(appointment.getUser());
+        validateDate(appointment.getAppointmentDate());
+        validateHospital(appointment.getHospital());
+        validateDoctor(appointment.getDoctor());
+        validateAppointmentId(appointment.getAppointmentId());
+        validateAppointmentstatus(appointment.getAppointmentStatus());
+        validateAppointmentreason(appointment.getReason());
+        Appointment resAppointment=appointmentRepo.save(appointment);
+        return appointment;
     }
 
     //Validate User
@@ -87,5 +98,32 @@ public class AppointmentsBo {
             throw new DOBException ("The appointment date must be within one month from the current date.");
         }
     }
+
+    //Validate AppointmentId
+    private void validateAppointmentId(long appointmentId) throws AppointmentException {
+        Optional<Appointment> appointment=appointmentRepo.findById(appointmentId);
+        if(appointment.get()==null){
+            throw new AppointmentException("Appointment Id is Not Exit in DataBase");
+        }
+    }
+
+    //Validate AppoitmentStatus
+    private void validateAppointmentstatus(String appointmentStatus) throws AppointmentException {
+        appointmentStatus=appointmentStatus.trim();
+        if(!(appointmentStatus.equalsIgnoreCase("Scheduled")||appointmentStatus.equalsIgnoreCase("Pending") ||appointmentStatus.equalsIgnoreCase("Cancel")||appointmentStatus.equalsIgnoreCase("Reschedule")||appointmentStatus.equalsIgnoreCase("Completed"))){
+            throw new AppointmentException("Invalid AppointmentStaus");
+        }
+    }
+
+    //Validate Appointment Reason
+    private void validateAppointmentreason(String reason) throws AppointmentException {
+        if(reason.length()>50){
+            throw new AppointmentException("Reason must Contain 50 Characters including Spaces");
+        }
+        if (!reason.matches("[a-zA-Z ]+")) {
+            throw new AppointmentException("Reason must contain only alphabets and spaces");
+        }
+    }
+
 
 }
