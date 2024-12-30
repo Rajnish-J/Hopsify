@@ -9,7 +9,10 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface UserRepo extends JpaRepository<User, Long> {
+    // validate Email
     List<User> findByUserEmail(String email);
+
+    //Validate Contact Number
     List<User> findByUserContactNo(long userContactNo);
 
     // view all appointments

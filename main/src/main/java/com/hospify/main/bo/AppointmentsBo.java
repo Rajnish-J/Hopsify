@@ -11,11 +11,11 @@ import com.hospify.main.entity.User;
 import com.hospify.main.exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import javax.print.Doc;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -61,6 +61,26 @@ public class AppointmentsBo {
         validateAppointmentreason(appointment.getReason());
         Appointment resAppointment=appointmentRepo.save(appointment);
         return appointment;
+    }
+
+    //Filter By Status Appointments
+    public List<Appointment> filterAppointments(String status) throws AppointmentException {
+        validateAppointmentstatus(status);
+        List<Appointment> resAppointment=appointmentRepo.findByAppointmentStatus(status);
+        if(resAppointment.isEmpty()){
+            return new ArrayList<Appointment>();
+        }
+        return resAppointment;
+    }
+
+    //Filter By Date
+    public List<Appointment> filterByDate(LocalDate startDate, LocalDate endDate) throws DOBException {
+        validateStartDateAndEndDate(startDate,endDate);
+        List<Appointment> appointmentList=appointmentRepo.findAppointmentsByDateRange(startDate,endDate);
+        if(appointmentList.isEmpty()){
+            return new ArrayList<Appointment>();
+        }
+        return appointmentList;
     }
 
     //Validate User
@@ -138,6 +158,31 @@ public class AppointmentsBo {
         }
         if (!reason.matches("[a-zA-Z ]+")) {
             throw new AppointmentException("Reason must contain only alphabets and spaces");
+        }
+    }
+
+    //Validate StartDate And EndDate
+    private void validateStartDateAndEndDate(LocalDate startDate, LocalDate endDate) throws DOBException {
+        if (startDate == null || endDate == null) {
+            throw new DOBException("Start date and end date cannot be null.");
+        }
+        // Validate that startDate is before endDate
+        if (!startDate.isBefore(endDate)) {
+            throw new DOBException("The start date must be before the end date.");
+        }
+        // Current date
+        LocalDate today = LocalDate.now();
+        // Ensure the start date is not more than a year in the past
+        if (startDate.isBefore(today.minusYears(1))) {
+            throw new DOBException("The start date cannot be more than a year in the past.");
+        }
+        // Ensure the end date is not more than a year in the future
+        if (endDate.isAfter(today.plusYears(1))) {
+            throw new DOBException("The end date cannot be more than a year in the future.");
+        }
+        // Optional: Add business-specific rules, such as ensuring the duration is reasonable
+        if (startDate.until(endDate, java.time.temporal.ChronoUnit.DAYS) > 30) {
+            throw new DOBException("The date range cannot exceed 30 days.");
         }
     }
 

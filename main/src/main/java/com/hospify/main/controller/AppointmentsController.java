@@ -6,9 +6,15 @@ import com.hospify.main.entity.*;
 import com.hospify.main.exception.*;
 import com.hospify.main.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 @RestController
 @RequestMapping("/appointment")
@@ -53,6 +59,56 @@ public class AppointmentsController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
 
+    }
+
+    //Filter Appointments
+    @GetMapping("/filterappointments")
+    public ResponseEntity<?> filterAppointments(@RequestParam String status){
+        try {
+           UserResponse resObj= appointmentService.filterAppointments(status);
+            List<AppointmentDTO> listAppointmentDTO=new ArrayList<>();
+            if(resObj.getAppointmentList().isEmpty()){
+                return ResponseEntity.ok(listAppointmentDTO);
+            }else{
+               List<Appointment> listAppointment=resObj.getAppointmentList();
+               for(Appointment appointment:listAppointment){
+                   listAppointmentDTO.add(mapToDto(appointment));
+               }
+               return ResponseEntity.ok(listAppointmentDTO);
+            }
+        } catch (AppointmentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    //Filter By Date
+    @GetMapping("/filterbydate")
+    public ResponseEntity<?> filterByDate(@RequestBody HashMap<String, String> dateFilterMap) {
+        try {
+            // Extract the startDate and endDate from the map
+            String startDateString = dateFilterMap.get("startDate");
+            String endDateString = dateFilterMap.get("endDate");
+
+            // Parse the dates from String to LocalDate
+            LocalDate startDate = LocalDate.parse(startDateString);
+            LocalDate endDate = LocalDate.parse(endDateString);
+
+            // Call the service to get filtered appointments
+            UserResponse resObj = appointmentService.filterByDate(startDate, endDate);
+
+            List<AppointmentDTO> listAppointmentDTO = new ArrayList<>();
+            if (resObj.getAppointmentList().isEmpty()) {
+                return ResponseEntity.ok(listAppointmentDTO);
+            } else {
+                List<Appointment> listAppointment = resObj.getAppointmentList();
+                for (Appointment appointment : listAppointment) {
+                    listAppointmentDTO.add(mapToDto(appointment));
+                }
+                return ResponseEntity.ok(listAppointmentDTO);
+            }
+        } catch (DOBException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
     //Map TO Entity

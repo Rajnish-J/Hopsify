@@ -9,6 +9,9 @@ import com.hospify.main.exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @Service
 public class AppointmentService {
 
@@ -40,5 +43,19 @@ public class AppointmentService {
             userResponse.setFailureMessage("Appointment is not Booked Successfully");
         }
        return userResponse;
+    }
+
+    //Filter Appointments
+    public UserResponse filterAppointments(String status) throws AppointmentException {
+        List<Appointment> resAppointments =appointmentsBo.filterAppointments(status);
+        userResponse.setAppointmentList(resAppointments);
+        return userResponse;
+    }
+
+    //Filter By Date
+    public UserResponse filterByDate(LocalDate startDate, LocalDate endDate) throws DOBException {
+        List<Appointment> resAppointments = appointmentsBo.filterByDate(startDate,endDate);
+        userResponse.setAppointmentList(resAppointments);
+        return userResponse;
     }
 }
