@@ -5,6 +5,8 @@ import com.hospify.main.entity.User;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @Scope("prototype")
 public class UserResponse {
@@ -12,6 +14,7 @@ public class UserResponse {
     private Appointment appointment;
     private String successMessage;
     private String failureMessage;
+    private List<Appointment> appointmentList;
 
     public Appointment getAppointment() {
         return appointment;
@@ -45,6 +48,14 @@ public class UserResponse {
         this.failureMessage = failureMessage;
     }
 
+    public List<Appointment> getAppointmentList() {
+        return appointmentList;
+    }
+
+    public void setAppointmentList(List<Appointment> appointmentList) {
+        this.appointmentList = appointmentList;
+    }
+
     @Override
     public String toString() {
         return "UserResponse{" +
@@ -52,6 +63,7 @@ public class UserResponse {
                 ", appointment=" + appointment +
                 ", successMessage='" + successMessage + '\'' +
                 ", failureMessage='" + failureMessage + '\'' +
+                ", appointmentList=" + appointmentList +
                 '}';
     }
 }

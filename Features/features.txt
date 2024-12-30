@@ -14,7 +14,7 @@ User:
 
 Appointments:
 
-    * if patient books appointment, it will goes respective doctors page
+    * if patient books appointment, it will goes respective doctors page to accept or reject.
     * after appointment booked it will send message in the mail as appointment added message
     * Payment (after payment it will send an mail to the respective hospital)
     * doctor can add the prescription respect to the patient

@@ -1,5 +1,6 @@
 package com.hospify.main.bo;
 import com.hospify.main.Repo.UserRepo;
+import com.hospify.main.entity.Appointment;
 import com.hospify.main.entity.User;
 import com.hospify.main.exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,8 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class UserBo {
@@ -38,6 +41,18 @@ public class UserBo {
         validatePhoneNumber(user.getUserContactNo());
         User userObj = userRepo.save(user);
         return userObj;
+    }
+
+    // view All appointments:
+    public List<Appointment> viewAllAppointments(long id) throws UserException {
+        if(validateID(id)){
+            List<Appointment> appointmentsList = userRepo.findAllAppointments(id);
+            if(appointmentsList.isEmpty()){
+                return (new ArrayList<>());
+            }
+            return appointmentsList;
+        }
+        return null;
     }
 
     //Validation
@@ -107,6 +122,23 @@ public class UserBo {
         if(!userRepo.findByUserContactNo(userContactNo).isEmpty()){
             throw new MobileNumberException("Mobile Number Already Exit in DataBase");
         }
+    }
+
+    // validate that patient that existing in the database or not:
+    public boolean validateID(Long id) throws UserException {
+        List<Long> pID = userRepo.fetchAllPatientId();
+
+        boolean contains = pID.contains(id);
+        if (!contains) {
+            throw new UserException("ERROR: patient ID not exist in the database");
+        }
+        if (id == null) {
+            throw new UserException("ERROR: patient Id field could not be null");
+        } else if (id <= 0) {
+            throw new UserException("ERROR: patient ID could not be negative or zero");
+        }
+
+        return true;
     }
 
 }
