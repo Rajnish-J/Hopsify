@@ -83,6 +83,18 @@ public class AppointmentsBo {
         return appointmentList;
     }
 
+    //Filter By DoctorId
+    public List<Appointment> filterByDoctorid(long doctorId) throws DoctorException {
+        Doctor doctorObj = new Doctor();
+        doctorObj.setDoctorId(doctorId);
+        validateDoctor(doctorObj);
+        List<Appointment> appointmentList = appointmentRepo.findByDoctor_DoctorId(doctorId);
+        if(appointmentList.isEmpty()){
+            return new ArrayList<Appointment>();
+        }
+        return appointmentList;
+    }
+
     //Validate User
     private void validateUser(User user) throws UserException {
         Optional<User> userObj=userRepo.findById(user.getUserId());
@@ -185,6 +197,4 @@ public class AppointmentsBo {
             throw new DOBException("The date range cannot exceed 30 days.");
         }
     }
-
-
 }

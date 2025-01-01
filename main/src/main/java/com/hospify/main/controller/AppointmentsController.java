@@ -6,7 +6,6 @@ import com.hospify.main.entity.*;
 import com.hospify.main.exception.*;
 import com.hospify.main.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -107,6 +106,26 @@ public class AppointmentsController {
                 return ResponseEntity.ok(listAppointmentDTO);
             }
         } catch (DOBException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    //Filter By DoctorId
+    @GetMapping("/filterappointmentsbydoctorid")
+    public ResponseEntity<?> filterByDocotorId(@RequestParam long doctorId){
+        try {
+            UserResponse resObj = appointmentService.filterByDoctorId(doctorId);
+            List<AppointmentDTO> listAppointmentDTO = new ArrayList<>();
+            if (resObj.getAppointmentList().isEmpty()) {
+                return ResponseEntity.ok(listAppointmentDTO);
+            } else {
+                List<Appointment> listAppointment = resObj.getAppointmentList();
+                for (Appointment appointment : listAppointment) {
+                    listAppointmentDTO.add(mapToDto(appointment));
+                }
+                return ResponseEntity.ok(listAppointmentDTO);
+            }
+        } catch (DoctorException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }

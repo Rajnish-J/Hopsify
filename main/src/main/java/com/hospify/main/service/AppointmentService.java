@@ -58,4 +58,11 @@ public class AppointmentService {
         userResponse.setAppointmentList(resAppointments);
         return userResponse;
     }
+
+    //Filter By DocotorId
+    public UserResponse filterByDoctorId(long doctorId) throws DoctorException {
+        List<Appointment> resAppointments = appointmentsBo.filterByDoctorid(doctorId);
+        userResponse.setAppointmentList(resAppointments);
+        return userResponse;
+    }
 }
