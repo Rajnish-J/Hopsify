@@ -1,21 +1,39 @@
 package com.hospify.main.DTO;
 
+import com.hospify.main.entity.Hospital;
+import com.hospify.main.entity.Medicine;
+import jakarta.persistence.*;
+
+import java.util.List;
+
 public class PharmacyDTO {
 
-    private long pharmacyId;
+   private long pharmacyId;
+   private String pharmacySpecialization;
 
-    private String pharmacySpecialization;
+    public long getPharmacyId() {
+        return pharmacyId;
+    }
 
-    private UserDTO user;
+    public void setPharmacyId(long pharmacyId) {
+        this.pharmacyId = pharmacyId;
+    }
 
-    private AppointmentDTO appointment;
+    public String getPharmacySpecialization() {
+        return pharmacySpecialization;
+    }
 
-    private DoctorDTO doctor;
+    public void setPharmacySpecialization(String pharmacySpecialization) {
+        this.pharmacySpecialization = pharmacySpecialization;
+    }
 
-    private HospitalDTO hospital;
+    //To String
 
-    private PaymentDTO payment;
-
-    private PrescriptionDTO prescription;
-
+    @Override
+    public String toString() {
+        return "PharmacyDTO{" +
+                "pharmacyId=" + pharmacyId +
+                ", pharmacySpecialization='" + pharmacySpecialization + '\'' +
+                '}';
+    }
 }

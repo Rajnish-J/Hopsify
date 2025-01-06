@@ -2,6 +2,7 @@ package com.hospify.main.entity;
 
 import jakarta.persistence.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import java.util.List;
 
 @Entity
@@ -12,22 +13,28 @@ public class Prescription {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long prescriptionId;
 
-    private String medicines;
-
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "pharmacy_id")
+    private Pharmacy pharmacy;
 
     @ManyToOne
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @OneToOne
     @JoinColumn(name = "appointment_id")
     private Appointment appointment;
 
-    @OneToMany(mappedBy = "prescription", cascade = CascadeType.ALL)
-    private List<Medicine> medicineList;
+    @ManyToMany
+    @JoinTable(
+            name = "prescription_medicine",
+            joinColumns = @JoinColumn(name = "prescription_id"),
+            inverseJoinColumns = @JoinColumn(name = "medicine_id"))
+    private List<Medicine> medicines;
 
     public long getPrescriptionId() {
         return prescriptionId;
@@ -37,20 +44,12 @@ public class Prescription {
         this.prescriptionId = prescriptionId;
     }
 
-    public String getMedicines() {
-        return medicines;
+    public Pharmacy getPharmacy() {
+        return pharmacy;
     }
 
-    public void setMedicines(String medicines) {
-        this.medicines = medicines;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    public void setPharmacy(Pharmacy pharmacy) {
+        this.pharmacy = pharmacy;
     }
 
     public Doctor getDoctor() {
@@ -61,6 +60,14 @@ public class Prescription {
         this.doctor = doctor;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Appointment getAppointment() {
         return appointment;
     }
@@ -69,23 +76,11 @@ public class Prescription {
         this.appointment = appointment;
     }
 
-    public List<Medicine> getMedicineList() {
-        return medicineList;
+    public List<Medicine> getMedicines() {
+        return medicines;
     }
 
-    public void setMedicineList(List<Medicine> medicineList) {
-        this.medicineList = medicineList;
-    }
-
-    @Override
-    public String toString() {
-        return "Prescription{" +
-                "prescriptionId=" + prescriptionId +
-                ", medicines='" + medicines + '\'' +
-                ", user=" + user +
-                ", doctor=" + doctor +
-                ", appointment=" + appointment +
-                ", medicineList=" + medicineList +
-                '}';
+    public void setMedicines(List<Medicine> medicines) {
+        this.medicines = medicines;
     }
 }
