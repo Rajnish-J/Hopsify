@@ -1,7 +1,10 @@
 package com.hospify.main.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.util.List;
 
 //Doubt : Because One Pharmacy can Contain multiple Appointments.
 
@@ -17,28 +20,13 @@ public class Pharmacy {
     private String pharmacySpecialization;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @ManyToOne
-    @JoinColumn(name = "appointment_id")
-    private Appointment appointment;
-
-    @ManyToOne
-    @JoinColumn(name = "doctor_id")
-    private Doctor doctor;
-
-    @ManyToOne
     @JoinColumn(name = "hospital_id")
+   // @JsonIgnore
     private Hospital hospital;
 
-    @ManyToOne
-    @JoinColumn(name = "payment_id")
-    private Payment payment;
-
-    @OneToOne
-    @JoinColumn(name = "prescription_id")
-    private Prescription prescription;
+   // @JsonIgnore
+    @OneToMany(mappedBy = "pharmacy", cascade = CascadeType.ALL)
+    private List<Medicine> medicines;
 
     public long getPharmacyId() {
         return pharmacyId;
@@ -56,30 +44,6 @@ public class Pharmacy {
         this.pharmacySpecialization = pharmacySpecialization;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Appointment getAppointment() {
-        return appointment;
-    }
-
-    public void setAppointment(Appointment appointment) {
-        this.appointment = appointment;
-    }
-
-    public Doctor getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
-    }
-
     public Hospital getHospital() {
         return hospital;
     }
@@ -88,33 +52,11 @@ public class Pharmacy {
         this.hospital = hospital;
     }
 
-    public Payment getPayment() {
-        return payment;
+    public List<Medicine> getMedicines() {
+        return medicines;
     }
 
-    public void setPayment(Payment payment) {
-        this.payment = payment;
-    }
-
-    public Prescription getPrescription() {
-        return prescription;
-    }
-
-    public void setPrescription(Prescription prescription) {
-        this.prescription = prescription;
-    }
-
-    @Override
-    public String toString() {
-        return "Pharmacy{" +
-                "pharmacyId=" + pharmacyId +
-                ", pharmacySpecialization='" + pharmacySpecialization + '\'' +
-                ", user=" + user +
-                ", appointment=" + appointment +
-                ", doctor=" + doctor +
-                ", hospital=" + hospital +
-                ", payment=" + payment +
-                ", prescription=" + prescription +
-                '}';
+    public void setMedicines(List<Medicine> medicines) {
+        this.medicines = medicines;
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 public class Medicine {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "medicine_id")
@@ -19,8 +20,8 @@ public class Medicine {
     private long medicinePrice;
 
     @ManyToOne
-    @JoinColumn(name = "prescription_id")
-    private Prescription prescription;
+    @JoinColumn(name = "pharmacy_id")
+    private Pharmacy pharmacy;
 
     public long getMedicineId() {
         return medicineId;
@@ -46,21 +47,12 @@ public class Medicine {
         this.medicinePrice = medicinePrice;
     }
 
-    public Prescription getPrescription() {
-        return prescription;
+    public Pharmacy getPharmacy() {
+        return pharmacy;
     }
 
-    public void setPrescription(Prescription prescription) {
-        this.prescription = prescription;
-    }
-
-    @Override
-    public String toString() {
-        return "Medicine{" +
-                "medicineId=" + medicineId +
-                ", medicineName='" + medicineName + '\'' +
-                ", medicinePrice=" + medicinePrice +
-                ", prescription=" + prescription +
-                '}';
+    public void setPharmacy(Pharmacy pharmacy) {
+        this.pharmacy = pharmacy;
     }
 }
+

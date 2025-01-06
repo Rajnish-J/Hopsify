@@ -139,18 +139,27 @@ public class AppointmentsController {
         if(appointmentDTO.getAppointmentId()!=0){
             appointment.setAppointmentId(appointmentDTO.getAppointmentId());
         }
+        User user = null;
+        if (appointmentDTO.getUser() != null && appointmentDTO.getUser().getUserId()>=0) {
+            user = new User();
+            user.setUserId(appointmentDTO.getUser().getUserId());
+            appointment.setUser(user);
+        }
 
-        User user=new User();
-        user.setUserId(appointmentDTO.getUser().getUserId());
-        appointment.setUser(user);
+        Doctor doctor = null;
+        if (appointmentDTO.getDoctor() != null && appointmentDTO.getDoctor().getDoctorId() >=0) {
+            doctor = new Doctor();
+            doctor.setDoctorId(appointmentDTO.getDoctor().getDoctorId());
+            appointment.setDoctor(doctor);
+        }
 
-        Doctor doctor=new Doctor();
-        doctor.setDoctorId(appointmentDTO.getDoctor().getDoctorId());
-        appointment.setDoctor(doctor);
+        Hospital hospital = null;
+        if (appointmentDTO.getHospital() != null && appointmentDTO.getHospital().getHospitalId() >=0) {
+            hospital = new Hospital();
+            hospital.setHospitalId(appointmentDTO.getHospital().getHospitalId());
+            appointment.setHospital(hospital);
+        }
 
-        Hospital hospital=new Hospital();
-        hospital.setHospitalId(appointmentDTO.getHospital().getHospitalId());
-        appointment.setHospital(hospital);
 
         if(appointmentDTO.getAppointmentStatus()!=null){
             appointment.setAppointmentStatus(appointmentDTO.getAppointmentStatus());
@@ -181,14 +190,17 @@ public class AppointmentsController {
 
         UserDTO userDTO = new UserDTO();
         userDTO.setUserId(appointment.getUser().getUserId());
+        userDTO.setUsername(appointment.getUser().getUsername());
         appointmentDTO.setUser(userDTO);
 
         DoctorDTO doctorDTO = new DoctorDTO();
         doctorDTO.setDoctorId(appointment.getDoctor().getDoctorId());
+        doctorDTO.setDoctorName(appointment.getDoctor().getDoctorName());
         appointmentDTO.setDoctor(doctorDTO);
 
         HospitalDTO hospitalDTO = new HospitalDTO();
         hospitalDTO.setHospitalId(appointment.getHospital().getHospitalId());
+        hospitalDTO.setHospitalName(appointment.getHospital().getHospitalName());
         appointmentDTO.setHospital(hospitalDTO);
 
         if (appointment.getPrescription() != null) {

@@ -17,8 +17,8 @@ Appointments:
     * if patient books appointment, it will goes respective doctors page to accept or reject. ================>DONE----------------->SABARI
     * after appointment booked it will send message in the mail as appointment added message
     * Payment (after payment it will send an mail to the respective hospital)
-    * doctor can add the prescription respect to the patient
-    * after done appointment the prescription could be redirected to the pharmacy with prescription id, to deleiver the medicines
+    * doctor can add the prescription respect to the patient  ================>DONE----------------->SABARI
+    * after done appointment the prescription could be redirected to the pharmacy with prescription id, to deleiver the medicines  ================>DONE----------------->SABARI
     * user and doctor can set the remainder before 1 hour or three hours or 12 hours or 1 day
     * user and doctor can set the remainder before 1hr or 3hr or 12hrs or one day.
 

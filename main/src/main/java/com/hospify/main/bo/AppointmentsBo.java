@@ -41,8 +41,8 @@ public class AppointmentsBo {
 
     public Appointment bookAppointment(Appointment appointment) throws UserException, DoctorException, HospitalException, DOBException, AppointmentException {
         validateUser(appointment.getUser());
-        validateDoctor(appointment.getDoctor());
-        validateHospital(appointment.getHospital());
+     validateDoctor(appointment.getDoctor());
+         validateHospital(appointment.getHospital());
         validateDate(appointment.getAppointmentDate());
         validateAppointmentreason(appointment.getReason());
         appointment.setAppointmentStatus("Pending");
@@ -52,15 +52,19 @@ public class AppointmentsBo {
 
     //Update Appointment
     public Appointment updateAppointment(Appointment appointment) throws UserException, DOBException, HospitalException, DoctorException, AppointmentException {
-        validateUser(appointment.getUser());
+       // validateUser(appointment.getUser());
         validateDate(appointment.getAppointmentDate());
-        validateHospital(appointment.getHospital());
-        validateDoctor(appointment.getDoctor());
-        validateAppointmentId(appointment.getAppointmentId());
+      //  validateHospital(appointment.getHospital());
+        // validateDoctor(appointment.getDoctor());
+        validateAppointment(appointment);
         validateAppointmentstatus(appointment.getAppointmentStatus());
-        validateAppointmentreason(appointment.getReason());
-        Appointment resAppointment=appointmentRepo.save(appointment);
-        return appointment;
+      //  validateAppointmentreason(appointment.getReason());
+        Optional<Appointment> resAppointmentObj=appointmentRepo.findById(appointment.getAppointmentId());
+        Appointment appointmentObj = resAppointmentObj.get();
+         appointmentObj.setAppointmentDate(appointment.getAppointmentDate());
+         appointmentObj.setAppointmentStatus(appointment.getAppointmentStatus());
+         appointmentObj = appointmentRepo.save(appointmentObj);
+        return appointmentObj;
     }
 
     //Filter By Status Appointments
@@ -148,11 +152,12 @@ public class AppointmentsBo {
 
 
     //Validate AppointmentId
-    private void validateAppointmentId(long appointmentId) throws AppointmentException {
-        Optional<Appointment> appointment=appointmentRepo.findById(appointmentId);
-        if(appointment.get()==null){
+    private void validateAppointment(Appointment appointment) throws AppointmentException {
+        Optional<Appointment> appointmentObj=appointmentRepo.findById(appointment.getAppointmentId());
+        if(appointmentObj.get()==null || !appointmentObj.isPresent()){
             throw new AppointmentException("Appointment Id is Not Exit in DataBase");
         }
+     //   appointment = appointmentObj.get();
     }
 
     //Validate AppoitmentStatus
