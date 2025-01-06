@@ -24,7 +24,6 @@ public class UserService {
         if(resUser!=null){
             userResponse.setSuccessMessage("SuccessFull Created User"+resUser);
             userResponse.setUser(user);
-            System.out.println(userResponse);
         }else{
             userResponse.setFailureMessage("Failed To Create the User");
         }

@@ -1,6 +1,8 @@
 package com.hospify.main.DTO;
 
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class DoctorDTO {
@@ -10,6 +12,8 @@ public class DoctorDTO {
     private String doctorName;
 
     private String specialization;
+
+    private LocalDate doctorDob;
 
     private String email;
 
@@ -47,6 +51,14 @@ public class DoctorDTO {
 
     public void setSpecialization(String specialization) {
         this.specialization = specialization;
+    }
+
+    public LocalDate getDoctorDob() {
+        return doctorDob;
+    }
+
+    public void setDoctorDob(LocalDate doctorDOB) {
+        this.doctorDob = doctorDOB;
     }
 
     public String getEmail() {

@@ -31,15 +31,7 @@ public class UserController {
             UserResponse response = userService.registerUser(maptoEntity(userDTO));
             User user= response.getUser();
             return ResponseEntity.ok(user);
-        } catch (PasswordException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        } catch (GenderException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        } catch (EmailException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        } catch (DOBException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        } catch (MobileNumberException e) {
+        } catch (PasswordException | GenderException | EmailException | DOBException | MobileNumberException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }

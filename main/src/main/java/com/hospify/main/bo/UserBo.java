@@ -126,9 +126,8 @@ public class UserBo {
 
     // validate that patient that existing in the database or not:
     public boolean validateID(Long id) throws UserException {
-        List<Long> pID = userRepo.fetchAllPatientId();
 
-        boolean contains = pID.contains(id);
+        boolean contains = userRepo.existsById(id);
         if (!contains) {
             throw new UserException("ERROR: patient ID not exist in the database");
         }

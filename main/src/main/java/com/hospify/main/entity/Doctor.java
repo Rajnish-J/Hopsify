@@ -1,6 +1,8 @@
 package com.hospify.main.entity;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -19,6 +21,9 @@ public class Doctor {
     @Column(nullable = false)
     private String specialization;
 
+    @Column(nullable = false)
+    private LocalDate doctorDob;
+
     @Column(unique = true,nullable = false)
     private String email;
 
@@ -30,6 +35,9 @@ public class Doctor {
 
     @Column(unique = true,nullable = false)
     private long doctorPhone;
+
+    @Column
+    private String professionalStatus;
 
     @ManyToOne
     @JoinColumn(name = "hospital_id")
@@ -121,16 +129,34 @@ public class Doctor {
         this.prescriptions = prescriptions;
     }
 
+    public String getProfessionalStatus() {
+        return professionalStatus;
+    }
+
+    public void setProfessionalStatus(String professionalStatus) {
+        this.professionalStatus = professionalStatus;
+    }
+
+    public LocalDate getDoctorDob() {
+        return doctorDob;
+    }
+
+    public void setDoctorDob(LocalDate userDob) {
+        this.doctorDob = userDob;
+    }
+
     @Override
     public String toString() {
         return "Doctor{" +
                 "doctorId=" + doctorId +
                 ", doctorName='" + doctorName + '\'' +
                 ", specialization='" + specialization + '\'' +
+                ", doctorDob=" + doctorDob +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", gender='" + gender + '\'' +
                 ", doctorPhone=" + doctorPhone +
+                ", professionalStatus='" + professionalStatus + '\'' +
                 ", hospital=" + hospital +
                 ", appointments=" + appointments +
                 ", prescriptions=" + prescriptions +

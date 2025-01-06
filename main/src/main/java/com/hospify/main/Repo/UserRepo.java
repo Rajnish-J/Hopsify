@@ -20,6 +20,5 @@ public interface UserRepo extends JpaRepository<User, Long> {
     List<Appointment> findAllAppointments(@Param("userId") long userId);
 
     // checking custom query for that incoming user id that first exists in the database:
-    @Query("SELECT u.userId AS userId FROM User u")
-    List<Long> fetchAllPatientId();
+    boolean existsById(Long userId);
 }
