@@ -166,7 +166,7 @@ public class DoctorController {
                     .map(prescriptionDTO -> {
                         Prescription prescription = new Prescription();
                         prescription.setPrescriptionId(prescriptionDTO.getPrescriptionId());
-                        prescriptionDTO.setMedicines(prescription.getMedicines());
+                        // prescriptionDTO.setMedicines(prescription.getMedicines());
                         // Map other fields as necessary
                         return prescription;
                     }).collect(Collectors.toList());

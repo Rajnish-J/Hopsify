@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c6951eef-556a-4834-90e0-88becc4fc9a2" name="Changes" comment="" />
+    <list default="true" id="c6951eef-556a-4834-90e0-88becc4fc9a2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/main/src/main/java/com/hospify/main/controller/DoctorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/main/java/com/hospify/main/controller/DoctorController.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,9 +21,9 @@
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="2" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2qTZneRNrC9qAHkHWst7Q1PAGhF" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -34,8 +36,9 @@
     "RunOnceActivity.git.unshallow": "true",
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/GroupProject/Hopsify/main"
+    "last_opened_file_path": "C:/Users/Lenovo/OneDrive/Desktop/GIT/Synergech_GIT/presentation demo proj/demo"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
