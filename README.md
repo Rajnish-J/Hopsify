@@ -1,6 +1,3 @@
 # Hopsify
 
-# sabari - Clone Done.
-
-# Rajnish - clone done.
-
+Will start soon....
