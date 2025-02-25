@@ -113,7 +113,7 @@ public class DoctorController {
                     .map(prescription -> {
                         PrescriptionDTO prescriptionDTO = new PrescriptionDTO();
                         prescriptionDTO.setPrescriptionId(prescription.getPrescriptionId());
-                        prescriptionDTO.setMedicines(prescription.getMedicines());
+                      //  prescriptionDTO.setMedicineList(prescription.getMedicinesList());
                         // Map other fields as necessary
                         return prescriptionDTO;
                     }).collect(Collectors.toList());
@@ -166,7 +166,7 @@ public class DoctorController {
                     .map(prescriptionDTO -> {
                         Prescription prescription = new Prescription();
                         prescription.setPrescriptionId(prescriptionDTO.getPrescriptionId());
-                        // prescriptionDTO.setMedicines(prescription.getMedicines());
+                    //     prescriptionDTO.setMedicines(prescription.getMedicines());
                         // Map other fields as necessary
                         return prescription;
                     }).collect(Collectors.toList());
